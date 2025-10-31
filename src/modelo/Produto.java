@@ -1,20 +1,21 @@
 package modelo;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
+//classe Produto
 public class Produto {
-    private int id;
+    private String id;
     private String nome;
     private String unidadeMedida;
     private double quantidade;
     private String categoria;
     private String lote;
     private Fornecedor fornecedor;
-    private LocalDate dataVencimento;
-    private double custoUnitario;
+    private LocalDateTime dataVencimento;
 
-    public Produto(int id, String nome, String unidadeMedida, double quantidade, String categoria,
-                   String lote, Fornecedor fornecedor, LocalDate dataVencimento, double custoUnitario) {
+    // Construtor inicial
+    public Produto(String id, String nome, String unidadeMedida, double quantidade,
+                   String categoria, String lote, Fornecedor fornecedor, LocalDateTime dataVencimento) {
         this.id = id;
         this.nome = nome;
         this.unidadeMedida = unidadeMedida;
@@ -23,42 +24,50 @@ public class Produto {
         this.lote = lote;
         this.fornecedor = fornecedor;
         this.dataVencimento = dataVencimento;
-        this.custoUnitario = custoUnitario;
     }
 
-    //Getters
-    public int getId(){
-        return id;}
+    // Getters
+    public String getId() {
+        return id;
+    }
 
-    public String getNome(){
-        return nome;}
+    public String getNome() {
+        return nome;
+    }
 
-    public String getUnidadeMedida(){
-        return unidadeMedida;}
+    public String getUnidadeMedida() {
+        return unidadeMedida;
+    }
 
-    public double getQuantidade(){
-        return quantidade;}
+    public double getQuantidade() {
+        return quantidade;
+    }
 
-    public String getCategoria(){
-        return categoria;}
+    public String getCategoria() {
+        return categoria;
+    }
 
-    public String getLote(){
-        return lote;}
+    public String getLote() {
+        return lote;
+    }
 
     public Fornecedor getFornecedor() {
-        return fornecedor;}
+        return fornecedor;
+    }
 
-    public LocalDate getDataVencimento(){
-        return dataVencimento;}
+    public LocalDateTime getDataVencimento() {
+        return dataVencimento;
+    }
 
-    public double getCustoUnitario(){
-        return custoUnitario;}
+    // Setters
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public void setNome(String nome) {
         this.nome = nome;
     }
 
-    //Setters
     public void setUnidadeMedida(String unidadeMedida) {
         this.unidadeMedida = unidadeMedida;
     }
@@ -79,20 +88,7 @@ public class Produto {
         this.fornecedor = fornecedor;
     }
 
-    public void setDataVencimento(LocalDate dataVencimento) {
+    public void setDataVencimento(LocalDateTime dataVencimento) {
         this.dataVencimento = dataVencimento;
-    }
-
-    public void setCustoUnitario(double custoUnitario) {
-        this.custoUnitario = custoUnitario;
-    }
-
-    //Calcular valor total
-    public double calcularValorTotal() {
-        return quantidade * custoUnitario;
-    }
-
-    public String toString() {
-        return nome + " (" + quantidade + " " + unidadeMedida + ")";
     }
 }
