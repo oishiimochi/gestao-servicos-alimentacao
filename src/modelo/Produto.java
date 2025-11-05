@@ -12,10 +12,11 @@ public class Produto {
     private String lote;
     private Fornecedor fornecedor;
     private LocalDateTime dataVencimento;
+    private double custoUnitario;
 
     // Construtor inicial
     public Produto(String id, String nome, String unidadeMedida, double quantidade,
-                   String categoria, String lote, Fornecedor fornecedor, LocalDateTime dataVencimento) {
+                   String categoria, String lote, Fornecedor fornecedor, LocalDateTime dataVencimento, double custoUnitario) {
         this.id = id;
         this.nome = nome;
         this.unidadeMedida = unidadeMedida;
@@ -24,6 +25,7 @@ public class Produto {
         this.lote = lote;
         this.fornecedor = fornecedor;
         this.dataVencimento = dataVencimento;
+        this.custoUnitario = custoUnitario;
     }
 
     // Getters
@@ -59,6 +61,10 @@ public class Produto {
         return dataVencimento;
     }
 
+    public double getCustoUnitario() {
+        return custoUnitario;
+    }
+
     // Setters
     public void setId(String id) {
         this.id = id;
@@ -90,5 +96,14 @@ public class Produto {
 
     public void setDataVencimento(LocalDateTime dataVencimento) {
         this.dataVencimento = dataVencimento;
+    }
+    public void setCustoUnitario(double custoUnitario) {
+
+        this.custoUnitario = custoUnitario;
+    }
+
+    //Cálculo valor Total
+    public double calcularValorTotal() {
+        return this.quantidade * this.custoUnitario;
     }
 }

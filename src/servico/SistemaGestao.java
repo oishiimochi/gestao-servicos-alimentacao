@@ -3,6 +3,7 @@ package servico;
 import modelo.*;
 import java.util.ArrayList;
 import java.time.LocalDate;
+import java.util.List;
 
 public class SistemaGestao {
 
@@ -12,6 +13,7 @@ public class SistemaGestao {
     private ArrayList<FichaTecnica> fichas;
     private ArrayList<Venda> vendas;
     private ArrayList<Usuario> usuarios;
+    private ArrayList<ItemRelatorioEngenharia> relatorioEngenharia;
 
     //Construtor
     public SistemaGestao() {
@@ -20,6 +22,7 @@ public class SistemaGestao {
         fichas = new ArrayList<>();
         vendas = new ArrayList<>();
         usuarios = new ArrayList<>();
+        relatorioEngenharia = new ArrayList<>();
     }
 
     // --------- MÉTODOS DE PRODUTO ---------
@@ -34,16 +37,16 @@ public class SistemaGestao {
         }
     }
 
-    public Produto buscarProdutoPorId(int id) {
+    public Produto buscarProdutoPorId(String id) {
         for (Produto p : produtos) {
-            if (p.getId() == id) {
+            if (p.getId().equals(id)) {
                 return p;
             }
         }
         return null;
     }
 
-    public void removerProduto(int id) {
+    public void removerProduto(String id) {
         Produto encontrado = buscarProdutoPorId(id);
         if (encontrado != null) {
             produtos.remove(encontrado);
@@ -173,5 +176,22 @@ public class SistemaGestao {
             }
         }
         System.out.println("Total vendido no dia: R$ " + total);
+    }
+    // --------- ENGENHARIA DE CARDÁPIO ---------
+
+    public List<ItemRelatorioEngenharia> gerarEArmazenarRelatorioEngenharia() {
+
+        EngenhariaCardapio motorAnalise = new EngenhariaCardapio();
+
+
+        this.relatorioEngenharia = (ArrayList<ItemRelatorioEngenharia>) motorAnalise.gerarRelatorio(this.fichas, this.vendas);
+
+        System.out.println("Relatório de Engenharia de Cardápio gerado e armazenado com sucesso!");
+
+        return this.relatorioEngenharia;
+    }
+
+    public ArrayList<ItemRelatorioEngenharia> getRelatorioEngenharia() {
+        return relatorioEngenharia;
     }
 }
