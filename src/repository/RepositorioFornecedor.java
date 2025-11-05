@@ -1,7 +1,5 @@
-package servico;
+package repository;
 import modelo.*;
-import java.util.ArrayList;
-
 import java.util.ArrayList;
 
 public class RepositorioFornecedor {

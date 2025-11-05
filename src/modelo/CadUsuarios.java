@@ -1,6 +1,6 @@
 package modelo;
-import servico.*;
-import Exeptions.*;
+import repository.RepositorioUsuario;
+import exceptions.*;
 
 public class CadUsuarios {
     private RepositorioUsuario repositorio;

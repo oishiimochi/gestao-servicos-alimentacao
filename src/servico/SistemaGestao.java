@@ -1,17 +1,24 @@
 package servico;
 
 import modelo.*;
+import repository.ItemVendaRepository;
+import repository.VendaRepository;
+import exceptions.RepositorioCheioException;
+import exceptions.ItemNaoEncontradoException;
+import exceptions.ValorNuloException;
+
 import java.util.ArrayList;
 import java.time.LocalDate;
 import java.util.List;
 
 public class SistemaGestao {
 
-    //Listas
+    //Listas e Repositórios
     private ArrayList<Produto> produtos;
     private ArrayList<Fornecedor> fornecedores;
     private ArrayList<FichaTecnica> fichas;
-    private ArrayList<Venda> vendas;
+    private final VendaRepository historicoVendas;
+    private final ItemVendaRepository catalogoItens;
     private ArrayList<Usuario> usuarios;
     private ArrayList<ItemRelatorioEngenharia> relatorioEngenharia;
 
@@ -20,7 +27,8 @@ public class SistemaGestao {
         produtos = new ArrayList<>();
         fornecedores = new ArrayList<>();
         fichas = new ArrayList<>();
-        vendas = new ArrayList<>();
+        historicoVendas = new VendaRepository();
+        catalogoItens = new ItemVendaRepository();
         usuarios = new ArrayList<>();
         relatorioEngenharia = new ArrayList<>();
     }
@@ -104,14 +112,30 @@ public class SistemaGestao {
         return null;
     }
 
+    // --------- MÉTODOS DE ITEM DE VENDA (CATÁLOGO) ---------
+    public void adicionarItemVenda(FichaTecnica ficha) throws ValorNuloException, RepositorioCheioException {
+        ItemVenda novoItem = new ItemVenda(ficha);
+        catalogoItens.adicionarItem(novoItem);
+        System.out.println("Item de venda '" + ficha.getNome() + "' adicionado ao catálogo.");
+    }
+
+    public ItemVenda buscarItemVendaPorIdFichaTecnica(int idFichaTecnica) throws ItemNaoEncontradoException {
+        return catalogoItens.buscarPorIdFichaTecnica(idFichaTecnica);
+    }
+
+    public void removerItemVenda(int idFichaTecnica) throws ItemNaoEncontradoException {
+        catalogoItens.removerItem(idFichaTecnica);
+        System.out.println("Item de venda removido do catálogo.");
+    }
+
     // --------- MÉTODOS DE VENDA ---------
-    public void registrarVenda(Venda venda) {
-        vendas.add(venda);
+    public void registrarVenda(Venda venda) throws RepositorioCheioException {
+        historicoVendas.registrarVenda(venda);
     }
 
     public void listarVendas() {
         System.out.println("=== Lista de Vendas ===");
-        for (Venda v : vendas) {
+        for (Venda v : historicoVendas.buscarTodas()) {
             System.out.println("Venda ID: " + v.getId() + " | Prato: " + v.getPrato().getNome() +
                     " | Qtd: " + v.getQuantidadeVendida() + " | Receita: R$ " + v.calcularReceitaTotal());
         }
@@ -119,7 +143,7 @@ public class SistemaGestao {
 
     public double calcularLucroTotal() {
         double total = 0;
-        for (Venda v : vendas) {
+        for (Venda v : historicoVendas.buscarTodas()) {
             total += v.calcularLucroBruto();
         }
         return total;
@@ -150,7 +174,7 @@ public class SistemaGestao {
     public ArrayList<Produto> getProdutos() { return produtos; }
     public ArrayList<Fornecedor> getFornecedores() { return fornecedores; }
     public ArrayList<FichaTecnica> getFichas() { return fichas; }
-    public ArrayList<Venda> getVendas() { return vendas; }
+    public List<Venda> getVendas() { return historicoVendas.buscarTodas(); }
     public ArrayList<Usuario> getUsuarios() { return usuarios; }
 
     // --------- RELATÓRIO GERAL ---------
@@ -159,7 +183,7 @@ public class SistemaGestao {
         System.out.println("Produtos no estoque: " + produtos.size());
         System.out.println("Fornecedores cadastrados: " + fornecedores.size());
         System.out.println("Fichas técnicas: " + fichas.size());
-        System.out.println("Vendas registradas: " + vendas.size());
+        System.out.println("Vendas registradas: " + historicoVendas.buscarTodas().size());
         System.out.println("Usuários cadastrados: " + usuarios.size());
         System.out.println("Valor total do estoque: R$ " + calcularValorTotalEstoque());
         System.out.println("Lucro total estimado: R$ " + calcularLucroTotal());
@@ -169,7 +193,7 @@ public class SistemaGestao {
     public void gerarResumoDiario(LocalDate data) {
         System.out.println("\n=== RESUMO DIÁRIO (" + data + ") ===");
         double total = 0;
-        for (Venda v : vendas) {
+        for (Venda v : historicoVendas.buscarTodas()) {
             if (v.getDataVenda().equals(data)) {
                 System.out.println(v.getPrato().getNome() + " - R$ " + v.calcularReceitaTotal());
                 total += v.calcularReceitaTotal();
@@ -184,7 +208,7 @@ public class SistemaGestao {
         EngenhariaCardapio motorAnalise = new EngenhariaCardapio();
 
 
-        this.relatorioEngenharia = (ArrayList<ItemRelatorioEngenharia>) motorAnalise.gerarRelatorio(this.fichas, this.vendas);
+        this.relatorioEngenharia = (ArrayList<ItemRelatorioEngenharia>) motorAnalise.gerarRelatorio(this.fichas, this.historicoVendas.buscarTodas());
 
         System.out.println("Relatório de Engenharia de Cardápio gerado e armazenado com sucesso!");
 

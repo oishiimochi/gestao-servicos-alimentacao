@@ -1,4 +1,4 @@
-package servico;
+package repository;
 
 import modelo.*;
 import java.util.ArrayList;

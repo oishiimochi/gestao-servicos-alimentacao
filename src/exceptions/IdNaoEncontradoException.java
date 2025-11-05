@@ -1,9 +1,9 @@
-package Exeptions;
+package exceptions;
 
 public class IdNaoEncontradoException extends RuntimeException {
     private int ID;
     public IdNaoEncontradoException(int ID){
-        this.ID = ID;
         super("O ID: " + ID + " não foi encontrado.");
+        this.ID = ID;
     }
 }

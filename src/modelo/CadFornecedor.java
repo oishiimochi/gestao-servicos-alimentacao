@@ -1,8 +1,8 @@
 package modelo;
 
-import Exeptions.IDExistenteException;
-import Exeptions.IdNaoEncontradoException;
-import servico.RepositorioFornecedor;
+import exceptions.IDExistenteException;
+import exceptions.IdNaoEncontradoException;
+import repository.RepositorioFornecedor;
 
 import java.util.ArrayList;
 
