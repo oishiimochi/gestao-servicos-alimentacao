@@ -128,6 +128,13 @@ public class SistemaGestao {
         System.out.println("Item de venda removido do catálogo.");
     }
 
+    public void listarItensVenda() {
+        System.out.println("=== Catálogo de Itens para Venda ===");
+        for (ItemVenda item : catalogoItens.buscarTodos()) {
+            System.out.println(item);
+        }
+    }
+
     // --------- MÉTODOS DE VENDA ---------
     public void registrarVenda(Venda venda) throws RepositorioCheioException {
         historicoVendas.registrarVenda(venda);
