@@ -1,14 +1,16 @@
-package modelo;
+package repository;
+
+import modelo.Produto;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Estoque {
+public class RepositorioProduto {
     private List<Produto> itemEstoque;
 
-    public Estoque() {
+    public RepositorioProduto() {
         this.itemEstoque = new ArrayList<>();
     }
 

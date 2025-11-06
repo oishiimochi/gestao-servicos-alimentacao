@@ -3,15 +3,15 @@ package fachada;
 import exceptions.IDExistenteException;
 import exceptions.IdNaoEncontradoException;
 import modelo.*;
-import servico.*;
-import repository.*;
+import repository.EngenhariaCardapio;
+import repository.RepositorioProduto;
 
 import java.util.List;
 
 public class Fachada {
     private CadUsuarios cadUsuarios;
     private CadFornecedor cadFornecedor;
-    private Estoque estoque;
+    private RepositorioProduto estoque;
     private EngenhariaCardapio engenhariaCardapio;
 
     private static Fachada instace;
@@ -19,7 +19,7 @@ public class Fachada {
     public Fachada(){
         cadUsuarios = new CadUsuarios();
         cadFornecedor = new CadFornecedor();
-        estoque = new Estoque();
+        estoque = new RepositorioProduto();
         engenhariaCardapio = new EngenhariaCardapio();
     }
 

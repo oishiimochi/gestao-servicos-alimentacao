@@ -1,6 +1,7 @@
 package servico;
 
 import modelo.*;
+import repository.EngenhariaCardapio;
 import repository.ItemVendaRepository;
 import repository.VendaRepository;
 import exceptions.RepositorioCheioException;

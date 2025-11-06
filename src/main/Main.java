@@ -45,11 +45,11 @@ public class Main {
                     resposta = sc.nextLine();
                     // Codigo de recuperação de senha
                     if (resposta.equalsIgnoreCase("S")) {
+                        boolean tentativarecuperarsenha = false;
+                        while (!tentativarecuperarsenha) {
                         System.out.println("Digite seu ID: ");
                         int ID = sc.nextInt();
                         sc.nextLine();
-                        boolean tentativarecuperarsenha = false;
-                        while (!tentativarecuperarsenha) {
                             try {
                                 Usuario tentativa = fachada.buscarUsuario(ID);
                                 System.out.println("Digite sua dica senha:");
@@ -100,8 +100,8 @@ public class Main {
                 }
                 try {
                     fachada.removerUsuario(fachada.buscarUsuario(126));
-                    if(fachada.buscarUsuario(126) == null){
-                        System.out.println("O usuario foi removido com sucesso");
+                    if(fachada.buscarUsuario(126) != null){
+                        System.out.println("O usuario não foi removido com sucesso");
                     }
                 }catch (IdNaoEncontradoException e){
                     System.out.println(e.getMessage());
@@ -119,6 +119,5 @@ public class Main {
 
             }
             sc.close();
-
     }
 }

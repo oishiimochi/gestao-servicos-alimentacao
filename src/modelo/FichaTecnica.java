@@ -19,8 +19,8 @@ public class FichaTecnica {
         this.rendimento = rendimento;
         this.ingredientes = new ArrayList<>();
     }
-
     //Getters
+
     public int getId() { return id; }
     public String getNome() { return nome; }
     public String getCategoria() { return categoria; }
