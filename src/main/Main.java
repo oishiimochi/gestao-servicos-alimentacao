@@ -98,6 +98,24 @@ public class Main {
                 }catch (IDExistenteException e){
                     System.out.println(e.getMessage());
                 }
+                try {
+                    fachada.removerUsuario(fachada.buscarUsuario(126));
+                    if(fachada.buscarUsuario(126) == null){
+                        System.out.println("O usuario foi removido com sucesso");
+                    }
+                }catch (IdNaoEncontradoException e){
+                    System.out.println(e.getMessage());
+                }
+                try {
+                    if(fachada.buscarFornecedor(123) != null){
+                        System.out.println("3");
+                    }
+                    fachada.removerFornecedor(fachada.buscarFornecedor(123));
+                    System.out.println("Fornecedor removido com sucesso!");
+                }catch (IdNaoEncontradoException e){
+                    System.out.println(e.getMessage());
+                }
+
 
             }
             sc.close();
