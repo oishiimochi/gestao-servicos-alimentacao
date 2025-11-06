@@ -13,7 +13,7 @@ public class SistemaGestao {
     private ArrayList<FichaTecnica> fichas;
     private ArrayList<Venda> vendas;
     private ArrayList<Usuario> usuarios;
-    private ArrayList<ItemRelatorioEngenharia> relatorioEngenharia;
+    private RepositorioRelatorios repositorioRelatorios;
 
     //Construtor
     public SistemaGestao() {
@@ -22,7 +22,7 @@ public class SistemaGestao {
         fichas = new ArrayList<>();
         vendas = new ArrayList<>();
         usuarios = new ArrayList<>();
-        relatorioEngenharia = new ArrayList<>();
+        repositorioRelatorios = new RepositorioRelatorios();
     }
 
     // --------- MÉTODOS DE PRODUTO ---------
@@ -179,19 +179,21 @@ public class SistemaGestao {
     }
     // --------- ENGENHARIA DE CARDÁPIO ---------
 
-    public List<ItemRelatorioEngenharia> gerarEArmazenarRelatorioEngenharia() {
+    //Aciona toda a funcionalidade de Engenharia de Cardápio
+    public RelatorioEngenharia gerarEArmazenarRelatorioEngenharia() {
 
         EngenhariaCardapio motorAnalise = new EngenhariaCardapio();
 
+        List<ItemRelatorioEngenharia> itensDoRelatorio = motorAnalise.gerarRelatorio(this.fichas, this.vendas);
 
-        this.relatorioEngenharia = (ArrayList<ItemRelatorioEngenharia>) motorAnalise.gerarRelatorio(this.fichas, this.vendas);
+        RelatorioEngenharia novoRelatorio = this.repositorioRelatorios.adicionarRelatorio(itensDoRelatorio);
 
-        System.out.println("Relatório de Engenharia de Cardápio gerado e armazenado com sucesso!");
+        System.out.println("Relatório (ID: " + novoRelatorio.getId() + ") gerado e armazenado no histórico");
 
-        return this.relatorioEngenharia;
+        return novoRelatorio;
     }
 
-    public ArrayList<ItemRelatorioEngenharia> getRelatorioEngenharia() {
-        return relatorioEngenharia;
+    public RepositorioRelatorios getRepositorioRelatorios() {
+        return repositorioRelatorios;
     }
 }
