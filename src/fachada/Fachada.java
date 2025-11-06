@@ -51,12 +51,18 @@ public class Fachada {
     public Usuario validarEntrada(String login, String senha) {
         return cadUsuarios.validarEntrada(login, senha);
     }
+    public Usuario recuperarSenha(String dicaSenha, int id){
+        return cadUsuarios.recuperarSenha(dicaSenha, id);
+    }
+    public void setSenha(Usuario usuario, String senha){
+        usuario.setSenha(senha);
+    }
     //------------------------Fornecedor-----------------------//
     public void adicionarFornecedor(Fornecedor fornecedor) throws IDExistenteException {
-        cadUsuarios.adicionarUsuario(fornecedor);
+        cadFornecedor.adicionarFornecedor(fornecedor);
     }
     public void removerFornecedor(Fornecedor fornecedor) throws IdNaoEncontradoException {
-        cadUsuarios.removerUsuario(fornecedor);
+        cadFornecedor.removerFornecedor(fornecedor);
     }
     public Fornecedor buscarFornecedor(int id) throws IdNaoEncontradoException {
         return cadFornecedor.buscarFornecedor(id);

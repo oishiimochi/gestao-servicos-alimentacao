@@ -51,4 +51,12 @@ public class CadUsuarios {
         }
         return null;
     }
+    public Usuario recuperarSenha(String dicaSenha, int id){
+        for(Usuario u: repositorio.getUsuarios()){
+            if(u.getDicaSenha().equals(dicaSenha) && u.getId() == id){
+                return u;
+            }
+        }
+        return null;
+    }
 }

@@ -15,7 +15,7 @@ public class CadFornecedor {
     public ArrayList<Fornecedor> getRepositorio() {
         return repositorio.getRepositorio();
     }
-    public void AdicionarFornecedor(Fornecedor fornecedor) throws IDExistenteException {
+    public void adicionarFornecedor(Fornecedor fornecedor) throws IDExistenteException {
         if(repositorio.buscarFornecedor(fornecedor.getId()) == null) {
             repositorio.adicionarFornecedor(fornecedor);
         }
@@ -23,7 +23,7 @@ public class CadFornecedor {
             throw new IDExistenteException(fornecedor.getId());
         }
     }
-    public void RemoverFornecedor(Fornecedor fornecedor) throws IdNaoEncontradoException {
+    public void removerFornecedor(Fornecedor fornecedor) throws IdNaoEncontradoException {
         if(repositorio.buscarFornecedor(fornecedor.getId()) != null) {
             repositorio.removerFornecedor(fornecedor);
         }
