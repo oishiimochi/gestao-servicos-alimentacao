@@ -30,8 +30,17 @@ public class Fachada {
         return instace;
     }
     // -------------------Usuario------------------------------//
-    public void adicionarUsuario(Usuario usuario) throws IDExistenteException {
+    public void adicionarUsuario(Usuario usuario) throws IDExistenteException{
         cadUsuarios.adicionarUsuario(usuario);
+    }
+    public void adicionarColaborador(int id, String nome, String login, String senha, String dicaSenha) throws IDExistenteException {
+        cadUsuarios.adicionarColaborador(id, nome, login, senha, dicaSenha);
+    }
+    public void adicionarGerente(int id, String nome, String login, String senha, String dicaSenha) throws IDExistenteException {
+        cadUsuarios.adicionarGerente(id, nome, login, senha, dicaSenha);
+    }
+    public void adicionarAdministrador(int id, String nome, String login, String senha, String dicaSenha) throws IDExistenteException {
+        cadUsuarios.adicionarAdministrador(id, nome, login, senha, dicaSenha);
     }
     public void removerUsuario(Usuario usuario) throws IdNaoEncontradoException {
         cadUsuarios.removerUsuario(usuario);
@@ -43,11 +52,11 @@ public class Fachada {
         return cadUsuarios.validarEntrada(login, senha);
     }
     //------------------------Fornecedor-----------------------//
-    public void adicionarFornecedor(Usuario usuario) throws IDExistenteException {
-        cadUsuarios.adicionarUsuario(usuario);
+    public void adicionarFornecedor(Fornecedor fornecedor) throws IDExistenteException {
+        cadUsuarios.adicionarUsuario(fornecedor);
     }
-    public void removerFornecedor(Usuario usuario) throws IdNaoEncontradoException {
-        cadUsuarios.removerUsuario(usuario);
+    public void removerFornecedor(Fornecedor fornecedor) throws IdNaoEncontradoException {
+        cadUsuarios.removerUsuario(fornecedor);
     }
     public Fornecedor buscarFornecedor(int id) throws IdNaoEncontradoException {
         return cadFornecedor.buscarFornecedor(id);

@@ -18,6 +18,18 @@ public class CadUsuarios {
             throw new IDExistenteException(usuario.getId());
         }
     }
+    public void adicionarColaborador(int id, String nome, String login, String senha, String dicaSenha) throws IDExistenteException {
+        Usuario novo = new Colaborador(id, nome, login, senha, dicaSenha);
+        adicionarUsuario(novo);
+    }
+    public void adicionarAdministrador(int id, String nome, String login, String senha, String dicaSenha) throws IDExistenteException {
+        Usuario novo = new Administrador(id, nome, login, senha, dicaSenha);
+        adicionarUsuario(novo);
+    }
+    public void adicionarGerente(int id, String nome, String login, String senha, String dicaSenha) throws IDExistenteException {
+        Usuario novo = new Gerente(id, nome, login, senha, dicaSenha);
+        adicionarUsuario(novo);
+    }
     public void removerUsuario(Usuario usuario) throws IdNaoEncontradoException{
         if(repositorio.buscarUsuario(usuario.getId()) == null) {
             throw new IdNaoEncontradoException(usuario.getId());
