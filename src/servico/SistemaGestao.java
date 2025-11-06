@@ -3,6 +3,7 @@ package servico;
 import modelo.*;
 import repository.ItemVendaRepository;
 import repository.VendaRepository;
+import exceptions.IDExistenteException;
 import exceptions.RepositorioCheioException;
 import exceptions.ItemNaoEncontradoException;
 import exceptions.ValorNuloException;
@@ -113,7 +114,7 @@ public class SistemaGestao {
     }
 
     // --------- MÉTODOS DE ITEM DE VENDA (CATÁLOGO) ---------
-    public void adicionarItemVenda(FichaTecnica ficha) throws ValorNuloException, RepositorioCheioException {
+    public void adicionarItemVenda(FichaTecnica ficha) throws ValorNuloException, RepositorioCheioException, IDExistenteException {
         ItemVenda novoItem = new ItemVenda(ficha);
         catalogoItens.adicionarItem(novoItem);
         System.out.println("Item de venda '" + ficha.getNome() + "' adicionado ao catálogo.");
@@ -136,7 +137,7 @@ public class SistemaGestao {
     }
 
     // --------- MÉTODOS DE VENDA ---------
-    public void registrarVenda(Venda venda) throws RepositorioCheioException {
+    public void registrarVenda(Venda venda) throws RepositorioCheioException, IDExistenteException {
         historicoVendas.registrarVenda(venda);
     }
 
@@ -192,7 +193,7 @@ public class SistemaGestao {
         System.out.println("Fichas técnicas: " + fichas.size());
         System.out.println("Vendas registradas: " + historicoVendas.buscarTodas().size());
         System.out.println("Usuários cadastrados: " + usuarios.size());
-        System.out.println("Valor total do estoque: R$ " + calcularValorTotalEstoque());
+        System.out.println("Valor total do estoque: " + calcularValorTotalEstoque());
         System.out.println("Lucro total estimado: R$ " + calcularLucroTotal());
     }
 

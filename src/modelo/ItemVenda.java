@@ -3,8 +3,8 @@ package modelo;
 import exceptions.ValorNuloException;
 
 public class ItemVenda {
-    private final FichaTecnica prato;
-    private final double precoVenda;
+    private FichaTecnica prato;
+    private double precoVenda;
 
     public ItemVenda(FichaTecnica prato) throws ValorNuloException {
         if (prato == null) {

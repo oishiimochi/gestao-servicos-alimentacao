@@ -1,5 +1,6 @@
 package repository;
 
+import exceptions.IDExistenteException;
 import exceptions.RepositorioCheioException;
 import modelo.Venda;
 
@@ -10,9 +11,14 @@ public class VendaRepository {
     private final List<Venda> historicoVendas = new ArrayList<>();
     private static final int CAPACIDADE_MAXIMA = 5000;
 
-    public void registrarVenda(Venda venda) throws RepositorioCheioException {
+    public void registrarVenda(Venda venda) throws RepositorioCheioException, IDExistenteException {
         if (historicoVendas.size() >= CAPACIDADE_MAXIMA) {
             throw new RepositorioCheioException("O histórico de vendas está cheio.");
+        }
+        for (Venda v : historicoVendas) {
+            if (v.getId() == venda.getId()) {
+                throw new IDExistenteException(venda.getId());
+            }
         }
         historicoVendas.add(venda);
     }

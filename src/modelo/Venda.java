@@ -6,10 +6,10 @@ import java.time.LocalDate;
 
 public class Venda {
     private static int proximoId = 1;
-    private final int id;
-    private final ItemVenda itemVendido;
-    private final int quantidadeVendida;
-    private final LocalDate dataVenda;
+    private int id;
+    private ItemVenda itemVendido;
+    private int quantidadeVendida;
+    private LocalDate dataVenda;
 
     public Venda(ItemVenda itemVendido, int quantidadeVendida, LocalDate dataVenda) throws ValorNuloException {
         if (itemVendido == null) {

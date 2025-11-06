@@ -1,5 +1,6 @@
 package repository;
 
+import exceptions.IDExistenteException;
 import exceptions.ItemNaoEncontradoException;
 import exceptions.RepositorioCheioException;
 import modelo.ItemVenda;
@@ -11,9 +12,14 @@ public class ItemVendaRepository {
     private final List<ItemVenda> catalogoItens = new ArrayList<>();
     private static final int CAPACIDADE_MAXIMA = 100; // Exemplo de capacidade
 
-    public void adicionarItem(ItemVenda item) throws RepositorioCheioException {
+    public void adicionarItem(ItemVenda item) throws RepositorioCheioException, IDExistenteException {
         if (catalogoItens.size() >= CAPACIDADE_MAXIMA) {
             throw new RepositorioCheioException("O catálogo de itens vendáveis está cheio.");
+        }
+        for (ItemVenda i : catalogoItens) {
+            if (i.getPrato().getId() == item.getPrato().getId()) {
+                throw new IDExistenteException(item.getPrato().getId());
+            }
         }
         catalogoItens.add(item);
     }
