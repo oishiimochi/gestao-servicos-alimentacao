@@ -1,0 +1,29 @@
+package repository;
+
+import exceptions.IDExistenteException;
+import exceptions.RepositorioCheioException;
+import modelo.Venda;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class VendaRepository {
+    private List<Venda> historicoVendas = new ArrayList<>();
+    private static int CAPACIDADE_MAXIMA = 5000;
+
+    public void registrarVenda(Venda venda) throws RepositorioCheioException, IDExistenteException {
+        if (historicoVendas.size() >= CAPACIDADE_MAXIMA) {
+            throw new RepositorioCheioException("O histórico de vendas está cheio.");
+        }
+        for (Venda v : historicoVendas) {
+            if (v.getId() == venda.getId()) {
+                throw new IDExistenteException(venda.getId());
+            }
+        }
+        historicoVendas.add(venda);
+    }
+
+    public List<Venda> buscarTodas() {
+        return new ArrayList<>(historicoVendas); // Retorna uma cópia para proteger a lista original
+    }
+}

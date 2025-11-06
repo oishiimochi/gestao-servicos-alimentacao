@@ -67,4 +67,9 @@ public abstract class Usuario {
             return "Dica incorreta!";
         }
     }
+
+    @Override
+    public String toString() {
+        return "ID:" + id + "Nome:" + nome + "\n";
+    }
 }
