@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ItemVendaRepository {
-    private final List<ItemVenda> catalogoItens = new ArrayList<>();
-    private static final int CAPACIDADE_MAXIMA = 100; // Exemplo de capacidade
+    private List<ItemVenda> catalogoItens = new ArrayList<>();
+    private static int CAPACIDADE_MAXIMA = 100; // Exemplo de capacidade
 
     public void adicionarItem(ItemVenda item) throws RepositorioCheioException, IDExistenteException {
         if (catalogoItens.size() >= CAPACIDADE_MAXIMA) {

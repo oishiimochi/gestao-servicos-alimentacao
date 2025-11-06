@@ -1,5 +1,6 @@
 package modelo;
 
+import exceptions.ValorInvalidoException;
 import exceptions.ValorNuloException;
 
 import java.time.LocalDate;
@@ -11,12 +12,15 @@ public class Venda {
     private int quantidadeVendida;
     private LocalDate dataVenda;
 
-    public Venda(ItemVenda itemVendido, int quantidadeVendida, LocalDate dataVenda) throws ValorNuloException {
+    public Venda(ItemVenda itemVendido, int quantidadeVendida, LocalDate dataVenda) throws ValorNuloException, ValorInvalidoException {
         if (itemVendido == null) {
             throw new ValorNuloException("O item vendido não pode ser nulo.");
         }
         if (dataVenda == null) {
             throw new ValorNuloException("A data da venda não pode ser nula.");
+        }
+        if (quantidadeVendida <= 0) {
+            throw new ValorInvalidoException("A quantidade vendida deve ser maior que zero.");
         }
         this.id = proximoId++;
         this.itemVendido = itemVendido;

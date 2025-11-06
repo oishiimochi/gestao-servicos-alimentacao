@@ -18,8 +18,8 @@ public class SistemaGestao {
     private ArrayList<Produto> produtos;
     private ArrayList<Fornecedor> fornecedores;
     private ArrayList<FichaTecnica> fichas;
-    private final VendaRepository historicoVendas;
-    private final ItemVendaRepository catalogoItens;
+    private VendaRepository historicoVendas;
+    private ItemVendaRepository catalogoItens;
     private ArrayList<Usuario> usuarios;
     private ArrayList<ItemRelatorioEngenharia> relatorioEngenharia;
 

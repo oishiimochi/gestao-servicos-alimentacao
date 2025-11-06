@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class VendaRepository {
-    private final List<Venda> historicoVendas = new ArrayList<>();
-    private static final int CAPACIDADE_MAXIMA = 5000;
+    private List<Venda> historicoVendas = new ArrayList<>();
+    private static int CAPACIDADE_MAXIMA = 5000;
 
     public void registrarVenda(Venda venda) throws RepositorioCheioException, IDExistenteException {
         if (historicoVendas.size() >= CAPACIDADE_MAXIMA) {
