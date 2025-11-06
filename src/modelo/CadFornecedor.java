@@ -23,7 +23,7 @@ public class CadFornecedor {
             throw new IDExistenteException(fornecedor.getId());
         }
     }
-    public void RemoverFornecedor(Fornecedor fornecedor) {
+    public void RemoverFornecedor(Fornecedor fornecedor) throws IdNaoEncontradoException {
         if(repositorio.buscarFornecedor(fornecedor.getId()) != null) {
             repositorio.removerFornecedor(fornecedor);
         }
@@ -31,7 +31,11 @@ public class CadFornecedor {
             throw new IdNaoEncontradoException(fornecedor.getId());
         }
     }
-    public Fornecedor buscarFornecedor(int ID) {
-        return repositorio.buscarFornecedor(ID);
+    public Fornecedor buscarFornecedor(int ID) throws IdNaoEncontradoException {
+        Fornecedor fornecedor = repositorio.buscarFornecedor(ID);
+        if(fornecedor == null) {
+            throw new IdNaoEncontradoException(ID);
+        }
+        return fornecedor;
     }
 }

@@ -24,12 +24,11 @@ public class CadUsuarios {
         }
         repositorio.removerUsuario(usuario);
     }
-    public Usuario BuscarUsuario(int ID) throws IdNaoEncontradoException {
+    public Usuario buscarUsuario(int ID) throws IdNaoEncontradoException {
         Usuario usuario = repositorio.buscarUsuario(ID);
         if(usuario == null) {
             throw new IdNaoEncontradoException(ID);
         }
         return usuario;
     }
-
 }
