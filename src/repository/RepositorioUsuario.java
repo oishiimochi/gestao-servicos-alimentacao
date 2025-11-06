@@ -28,4 +28,7 @@ public class RepositorioUsuario {
         usuarios.remove(usuario);
         return usuario;
     }
+    public ArrayList<Usuario> getRepositorio(){
+        return usuarios;
+    }
 }

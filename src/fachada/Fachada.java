@@ -39,6 +39,9 @@ public class Fachada {
     public Usuario buscarUsuario(int id) throws IdNaoEncontradoException {
         return cadUsuarios.buscarUsuario(id);
     }
+    public Usuario validarEntrada(String login, String senha) {
+        return cadUsuarios.validarEntrada(login, senha);
+    }
     //------------------------Fornecedor-----------------------//
     public void adicionarFornecedor(Usuario usuario) throws IDExistenteException {
         cadUsuarios.adicionarUsuario(usuario);

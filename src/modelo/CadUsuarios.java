@@ -31,4 +31,12 @@ public class CadUsuarios {
         }
         return usuario;
     }
+    public Usuario validarEntrada(String login, String senha){
+        for(Usuario u: repositorio.getUsuarios()){
+            if(u.getLogin().equals(login) && u.getSenha().equals(senha)){
+                return u;
+            }
+        }
+        return null;
+    }
 }
