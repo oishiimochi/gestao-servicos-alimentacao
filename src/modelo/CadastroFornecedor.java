@@ -6,10 +6,10 @@ import repository.RepositorioFornecedor;
 
 import java.util.ArrayList;
 
-public class CadFornecedor {
+public class CadastroFornecedor {
     private RepositorioFornecedor repositorio;
 
-    public CadFornecedor() {
+    public CadastroFornecedor() {
         this.repositorio = new RepositorioFornecedor();
     }
     public ArrayList<Fornecedor> getRepositorio() {

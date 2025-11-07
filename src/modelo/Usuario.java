@@ -1,23 +1,27 @@
 package modelo;
 
-public abstract class Usuario {
-    private int id;
+import enums.TipoUsuario;
+
+public class Usuario {
+    private String id;
     private String nome;
     private String login;
     private String senha;
     private String dicaSenha;
+    private TipoUsuario tipo;
 
 
-    public Usuario(int id, String nome, String login, String senha, String dicaSenha) {
+    public Usuario(String id, String nome, String login, String senha, String dicaSenha, TipoUsuario tipo) {
         this.id = id;
         this.nome = nome;
         this.login = login;
         this.senha = senha;
         this.dicaSenha = dicaSenha;
+        this.tipo = tipo;
     }
 
     //Getters
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -37,8 +41,12 @@ public abstract class Usuario {
         return dicaSenha;
     }
 
+    public TipoUsuario getTipo() {
+        return tipo;
+    }
+
     //Setters
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -53,6 +61,7 @@ public abstract class Usuario {
     public void setDicaSenha(String dicaSenha) {
         this.dicaSenha = dicaSenha;
     }
+    public void setTipo(TipoUsuario tipo) {this.tipo = tipo; }
 
     //Autenticar senha
     public boolean autenticar(String login, String senha) {

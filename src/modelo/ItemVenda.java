@@ -6,6 +6,7 @@ public class ItemVenda {
     private FichaTecnica prato;
     private double precoVenda;
 
+
     public ItemVenda(FichaTecnica prato) throws ValorNuloException {
         if (prato == null) {
             throw new ValorNuloException("A ficha técnica não pode ser nula para criar um item de venda.");

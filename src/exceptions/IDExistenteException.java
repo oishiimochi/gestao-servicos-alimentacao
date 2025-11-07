@@ -1,9 +1,7 @@
 package exceptions;
 
 public class IDExistenteException extends Exception {
-    private int ID;
-    public IDExistenteException(int ID) {
-        super("O ID: " + ID + " já existe no sistema.");
-        this.ID = ID;
+    public IDExistenteException(String Id, String tipo) {
+        super("Existe "+ tipo +" de ID " + Id + " no sistema!");
     }
 }

@@ -4,21 +4,20 @@ import exceptions.IDExistenteException;
 import exceptions.IdNaoEncontradoException;
 import modelo.*;
 import servico.*;
-import repository.*;
 
 import java.util.List;
 
 public class Fachada {
-    private CadUsuarios cadUsuarios;
-    private CadFornecedor cadFornecedor;
+    private CadastroUsuarios cadastroUsuarios;
+    private CadastroFornecedor cadastroFornecedor;
     private Estoque estoque;
     private EngenhariaCardapio engenhariaCardapio;
 
     private static Fachada instace;
 
     public Fachada(){
-        cadUsuarios = new CadUsuarios();
-        cadFornecedor = new CadFornecedor();
+        cadastroUsuarios = CadastroUsuarios.getInstace();
+        cadastroFornecedor = new CadastroFornecedor();
         estoque = new Estoque();
         engenhariaCardapio = new EngenhariaCardapio();
     }
@@ -31,41 +30,32 @@ public class Fachada {
     }
     // -------------------Usuario------------------------------//
     public void adicionarUsuario(Usuario usuario) throws IDExistenteException{
-        cadUsuarios.adicionarUsuario(usuario);
-    }
-    public void adicionarColaborador(int id, String nome, String login, String senha, String dicaSenha) throws IDExistenteException {
-        cadUsuarios.adicionarColaborador(id, nome, login, senha, dicaSenha);
-    }
-    public void adicionarGerente(int id, String nome, String login, String senha, String dicaSenha) throws IDExistenteException {
-        cadUsuarios.adicionarGerente(id, nome, login, senha, dicaSenha);
-    }
-    public void adicionarAdministrador(int id, String nome, String login, String senha, String dicaSenha) throws IDExistenteException {
-        cadUsuarios.adicionarAdministrador(id, nome, login, senha, dicaSenha);
+        cadastroUsuarios.adicionarUsuario(usuario);
     }
     public void removerUsuario(Usuario usuario) throws IdNaoEncontradoException {
-        cadUsuarios.removerUsuario(usuario);
+        cadastroUsuarios.removerUsuario(usuario);
     }
-    public Usuario buscarUsuario(int id) throws IdNaoEncontradoException {
-        return cadUsuarios.buscarUsuario(id);
+    public Usuario buscarUsuario(String ID) throws IdNaoEncontradoException {
+        return cadastroUsuarios.buscarUsuario(ID);
     }
     public Usuario validarEntrada(String login, String senha) {
-        return cadUsuarios.validarEntrada(login, senha);
+        return cadastroUsuarios.validarEntrada(login, senha);
     }
-    public Usuario recuperarSenha(String dicaSenha, int id){
-        return cadUsuarios.recuperarSenha(dicaSenha, id);
+    public Usuario recuperarSenha(String dicaSenha, String ID){
+        return cadastroUsuarios.recuperarSenha(dicaSenha, ID);
     }
     public void setSenha(Usuario usuario, String senha){
         usuario.setSenha(senha);
     }
     //------------------------Fornecedor-----------------------//
     public void adicionarFornecedor(Fornecedor fornecedor) throws IDExistenteException {
-        cadFornecedor.adicionarFornecedor(fornecedor);
+        cadastroFornecedor.adicionarFornecedor(fornecedor);
     }
     public void removerFornecedor(Fornecedor fornecedor) throws IdNaoEncontradoException {
-        cadFornecedor.removerFornecedor(fornecedor);
+        cadastroFornecedor.removerFornecedor(fornecedor);
     }
     public Fornecedor buscarFornecedor(int id) throws IdNaoEncontradoException {
-        return cadFornecedor.buscarFornecedor(id);
+        return cadastroFornecedor.buscarFornecedor(id);
     }
     //-------------------------Estoque-------------------------//
     public void adicionarProduto(Produto produto){
