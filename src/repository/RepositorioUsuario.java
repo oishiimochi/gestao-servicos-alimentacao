@@ -8,9 +8,16 @@ public class RepositorioUsuario {
 
     private Usuario[] usuarios;
     private int posicaolivre;
+    private static RepositorioUsuario instance;
 
     public RepositorioUsuario() {
         usuarios = new Usuario[50];
+    }
+    public static RepositorioUsuario getInstance() {
+        if (instance == null) {
+            instance = new RepositorioUsuario();
+        }
+        return instance;
     }
     public Usuario[] getUsuarios() {
         return usuarios;

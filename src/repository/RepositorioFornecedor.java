@@ -17,9 +17,9 @@ public class RepositorioFornecedor {
     public void removerFornecedor(Fornecedor fornecedor) {
         this.repositorio.remove(fornecedor);
     }
-    public Fornecedor buscarFornecedor(int ID) {
+    public Fornecedor buscarFornecedor(String ID) {
         for (Fornecedor fornecedor : repositorio) {
-            if (fornecedor.getId() == ID) {
+            if (fornecedor.getId().equals(ID)) {
                 return fornecedor;
             }
         }

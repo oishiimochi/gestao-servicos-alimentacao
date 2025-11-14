@@ -1,13 +1,13 @@
 package modelo;
 
 public class Fornecedor {
-    private int id;
+    private String id;
     private String nome;
     private String cnpj;
     private String telefone;
     private String email;
 
-    public Fornecedor(int id, String nome, String cnpj, String telefone, String email) {
+    public Fornecedor(String id, String nome, String cnpj, String telefone, String email) {
         this.id = id;
         this.nome = nome;
         this.cnpj = cnpj;
@@ -16,7 +16,7 @@ public class Fornecedor {
     }
 
     //Getters
-    public int getId() {
+    public String getId() {
         return id;
     }
 

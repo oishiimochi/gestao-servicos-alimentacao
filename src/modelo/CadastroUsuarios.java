@@ -1,20 +1,14 @@
 package modelo;
+import repository.RepositorioControleDeAcesso;
 import repository.RepositorioUsuario;
 import exceptions.*;
 
 public class CadastroUsuarios {
     private RepositorioUsuario repositorio;
-    private static CadastroUsuarios instace;
 
     // Adicionar Singleton
-    public CadastroUsuarios(RepositorioUsuario repositorio) {
-        this.repositorio = repositorio;
-    }
-    public static CadastroUsuarios getInstace() {
-        if(instace == null){
-            instace = new CadastroUsuarios(new RepositorioUsuario());
-        }
-        return instace;
+    public CadastroUsuarios() {
+        this.repositorio = RepositorioUsuario.getInstance();
     }
     public Usuario buscarUsuario(String ID) throws IdNaoEncontradoException {
         Usuario usuario = repositorio.buscarUsuario(ID);
@@ -24,6 +18,7 @@ public class CadastroUsuarios {
         return usuario;
     }
     public void adicionarUsuario(Usuario usuario) throws IDExistenteException {
+
         if(repositorio.buscarUsuario(usuario.getId()) == null) {
             repositorio.adicionarUsuario(usuario);
         }

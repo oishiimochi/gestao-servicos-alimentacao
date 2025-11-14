@@ -12,15 +12,12 @@ public class CadastroFornecedor {
     public CadastroFornecedor() {
         this.repositorio = new RepositorioFornecedor();
     }
-    public ArrayList<Fornecedor> getRepositorio() {
-        return repositorio.getRepositorio();
-    }
     public void adicionarFornecedor(Fornecedor fornecedor) throws IDExistenteException {
         if(repositorio.buscarFornecedor(fornecedor.getId()) == null) {
             repositorio.adicionarFornecedor(fornecedor);
         }
         else {
-            throw new IDExistenteException(fornecedor.getId());
+            throw new IDExistenteException(fornecedor.getId(), "Fornecedor");
         }
     }
     public void removerFornecedor(Fornecedor fornecedor) throws IdNaoEncontradoException {
@@ -28,13 +25,13 @@ public class CadastroFornecedor {
             repositorio.removerFornecedor(fornecedor);
         }
         else {
-            throw new IdNaoEncontradoException(fornecedor.getId());
+            throw new IdNaoEncontradoException(fornecedor.getId(), "Fornecedor");
         }
     }
-    public Fornecedor buscarFornecedor(int ID) throws IdNaoEncontradoException {
+    public Fornecedor buscarFornecedor(String ID) throws IdNaoEncontradoException {
         Fornecedor fornecedor = repositorio.buscarFornecedor(ID);
         if(fornecedor == null) {
-            throw new IdNaoEncontradoException(ID);
+            throw new IdNaoEncontradoException(ID, "Fornecedor");
         }
         return fornecedor;
     }

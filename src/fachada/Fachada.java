@@ -16,7 +16,7 @@ public class Fachada {
     private static Fachada instace;
 
     public Fachada(){
-        cadastroUsuarios = CadastroUsuarios.getInstace();
+        cadastroUsuarios = new CadastroUsuarios();
         cadastroFornecedor = new CadastroFornecedor();
         estoque = new Estoque();
         engenhariaCardapio = new EngenhariaCardapio();
@@ -54,8 +54,8 @@ public class Fachada {
     public void removerFornecedor(Fornecedor fornecedor) throws IdNaoEncontradoException {
         cadastroFornecedor.removerFornecedor(fornecedor);
     }
-    public Fornecedor buscarFornecedor(int id) throws IdNaoEncontradoException {
-        return cadastroFornecedor.buscarFornecedor(id);
+    public Fornecedor buscarFornecedor(String ID) throws IdNaoEncontradoException {
+        return cadastroFornecedor.buscarFornecedor(ID);
     }
     //-------------------------Estoque-------------------------//
     public void adicionarProduto(Produto produto){
