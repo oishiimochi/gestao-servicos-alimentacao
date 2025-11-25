@@ -27,16 +27,18 @@ public class CadastroControleDeAcesso {
     public void adicionarAcessoColaborador(String metodo) throws RepositorioCheioException {
        repositorioControleDeAcesso.adicionarAcessoColaborador(metodo);
     }
-    public int buscarAcessoGerente(String metodo) throws MetodoNaoEncontradoException {
+    public String buscarAcessoGerente(String metodo) throws MetodoNaoEncontradoException {
         return repositorioControleDeAcesso.buscarAcessoGerente(metodo);
     }
-    public int buscarAcessoColaborador(String metodo) throws MetodoNaoEncontradoException {
+    public String buscarAcessoColaborador(String metodo) throws MetodoNaoEncontradoException {
         return repositorioControleDeAcesso.buscarAcessoColaborador(metodo);
     }
-    public void removerAcessoGerente(String metodo) throws RepositorioCheioException {
+    public void removerAcessoGerente(String metodo) throws MetodoNaoEncontradoException {
+        this.buscarAcessoGerente(metodo);
         repositorioControleDeAcesso.removerAcessoGerente(metodo);
     }
-    public void removerAcessoColaborador(String metodo) throws RepositorioCheioException {
+    public void removerAcessoColaborador(String metodo) throws MetodoNaoEncontradoException {
+        this.buscarAcessoColaborador(metodo);
         repositorioControleDeAcesso.removerAcessoColaborador(metodo);
     }
 }

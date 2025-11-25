@@ -42,10 +42,10 @@ public class RepositorioControleDeAcesso {
         this.acessoGerente = acessoGerente;
     }
     //Métodos
-    public void adicionarAcessoGerente(String metodo) throws RepositorioCheioException {
+    public void adicionarAcessoGerente(String metodo) {
         this.acessoGerente.add(metodo);
     }
-    public void adicionarAcessoColaborador(String metodo) throws RepositorioCheioException {
+    public void adicionarAcessoColaborador(String metodo){
         this.acessoColaborador.add(metodo);
     }
     public String buscarAcessoGerente(String metodo) throws MetodoNaoEncontradoException {
@@ -61,11 +61,9 @@ public class RepositorioControleDeAcesso {
         throw new MetodoNaoEncontradoException("O nível de acesso colaborador não possui acesso ao método: " + metodo);
     }
     public void removerAcessoGerente(String metodo) throws MetodoNaoEncontradoException {
-        buscarAcessoGerente(metodo);
         this.acessoGerente.remove(metodo);
     }
     public void removerAcessoColaborador(String metodo) throws MetodoNaoEncontradoException {
-        buscarAcessoColaborador(metodo);
         this.acessoColaborador.remove(metodo);
     }
     public void verificarPermissaoGerente(String metodo) throws AcessoNegadoException {
