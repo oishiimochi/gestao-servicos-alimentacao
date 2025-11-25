@@ -6,16 +6,18 @@ import exceptions.AcessoNegadoException;
 import exceptions.RepositorioCheioException;
 import exceptions.MetodoNaoEncontradoException;
 
+import java.util.ArrayList;
+
 public class RepositorioControleDeAcesso {
-    private String[] acessoGerente;
-    private String[] acessoColaborador;
+    private ArrayList<String> acessoGerente;
+    private ArrayList<String> acessoColaborador;
     private int posicaoLivreGerente;
     private int posicaoLivreColaborador;
     private static RepositorioControleDeAcesso instance;
 
     public RepositorioControleDeAcesso() {
-        this.acessoColaborador = new String[10];
-        this.acessoGerente = new String[30];
+        this.acessoColaborador = new ArrayList<>();
+        this.acessoGerente = new ArrayList<>();
     }
     public static RepositorioControleDeAcesso getInstance() {
         if (instance == null) {
@@ -24,79 +26,57 @@ public class RepositorioControleDeAcesso {
         return instance;
     }
     //getters
-    public String[] getAcessoColaborador() {
+    public ArrayList<String> getAcessoColaborador() {
         return acessoColaborador;
     }
 
-    public String[] getAcessoGerente() {
+    public ArrayList<String> getAcessoGerente() {
         return acessoGerente;
     }
     //setters
-    public void setAcessoColaborador(String[] acessoColaborador) {
+    public void setAcessoColaborador(ArrayList<String> acessoColaborador) {
         this.acessoColaborador = acessoColaborador;
     }
 
-    public void setAcessoGerente(String[] acessoGerente) {
+    public void setAcessoGerente(ArrayList<String> acessoGerente) {
         this.acessoGerente = acessoGerente;
     }
     //Métodos
     public void adicionarAcessoGerente(String metodo) throws RepositorioCheioException {
-        if(posicaoLivreGerente != acessoColaborador.length){
-            acessoGerente[posicaoLivreGerente] = metodo;
-            posicaoLivreGerente++;
-        }
-        else{
-            throw new RepositorioCheioException("Erro ao adicionar acesso de gerente: Repositorio Cheio.");
-        }
+        this.acessoGerente.add(metodo);
     }
     public void adicionarAcessoColaborador(String metodo) throws RepositorioCheioException {
-        if(posicaoLivreColaborador != acessoGerente.length){
-            acessoColaborador[posicaoLivreColaborador] = metodo;
-            posicaoLivreColaborador++;
-        }
-        else{
-            throw new RepositorioCheioException("Erro ao adicionar acesso de Colaborador: Repositorio Cheio.");
-        }
+        this.acessoColaborador.add(metodo);
     }
-    public int buscarAcessoGerente(String metodo) throws MetodoNaoEncontradoException {
-        for(int i = 0; i < acessoGerente.length; i++){
-            if(acessoGerente[i].equals(metodo)){
-                return i;
-            }
+    public String buscarAcessoGerente(String metodo) throws MetodoNaoEncontradoException {
+        if(this.acessoGerente.contains(metodo)){
+            return metodo;
         }
         throw new MetodoNaoEncontradoException("O nível de acesso gerente não possui acesso ao método: " + metodo);
     }
-    public int buscarAcessoColaborador(String metodo) throws MetodoNaoEncontradoException {
-        for(int i = 0; i < acessoColaborador.length; i++){
-            if(acessoColaborador[i].equals(metodo)){
-                return i;
-            }
+    public String buscarAcessoColaborador(String metodo) throws MetodoNaoEncontradoException {
+        if(this.acessoColaborador.contains(metodo)){
+            return metodo;
         }
         throw new MetodoNaoEncontradoException("O nível de acesso colaborador não possui acesso ao método: " + metodo);
     }
-    public void removerAcessoGerente(String metodo) throws RepositorioCheioException {
-        int posicao = buscarAcessoGerente(metodo);
-        acessoGerente[posicao] = acessoGerente[posicaoLivreGerente];
-        posicaoLivreGerente--;
+    public void removerAcessoGerente(String metodo) throws MetodoNaoEncontradoException {
+        buscarAcessoGerente(metodo);
+        this.acessoGerente.remove(metodo);
     }
-    public void removerAcessoColaborador(String metodo) throws RepositorioCheioException {
-        int posicao = buscarAcessoColaborador(metodo);
-        acessoColaborador[posicao] = acessoColaborador[posicaoLivreColaborador];
-        posicaoLivreColaborador--;
+    public void removerAcessoColaborador(String metodo) throws MetodoNaoEncontradoException {
+        buscarAcessoColaborador(metodo);
+        this.acessoColaborador.remove(metodo);
     }
     public void verificarPermissaoGerente(String metodo) throws AcessoNegadoException {
-        for(int i = 0; i < acessoGerente.length; i++) {
-            if(acessoGerente[i].equals(metodo)) {
-                return;
-            }
+        if(this.acessoGerente.contains(metodo)){
+            return;
         }
         throw new AcessoNegadoException("Acesso negado: Nível de acesso administrador necessário.");
     }
     public void verificarPermissaoColaborador(String metodo) throws AcessoNegadoException {
-        for(int i = 0; i < acessoColaborador.length; i++) {
-            if(acessoColaborador[i].equals(metodo)) {
-                return;
-            }
+        if(this.acessoColaborador.contains(metodo)){
+            return;
         }
         throw new AcessoNegadoException("Acesso negado.");
     }

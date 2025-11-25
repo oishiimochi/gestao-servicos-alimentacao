@@ -11,14 +11,13 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Fachada fachada = Fachada.getInstace();
-        Fornecedor fornecedor = new Fornecedor(123, "Paulo", "123456789", "(81)985067123", "paulomorais@gmail.com");
+        Fornecedor fornecedor = new Fornecedor("123", "Paulo", "123456789", "(81)985067123", "paulomorais@gmail.com");
         System.out.println("Iniciando o programa...\n");
         try {
             fachada.adicionarUsuario(new Usuario("123", "Luiz", "Luiz91558", "Estrela", "Sol", TipoUsuario.Administrador));
             fachada.adicionarUsuario(new Usuario("124", "Antonio", "Antonio5674", "Uvas", "videira", TipoUsuario.Gerente));
             fachada.adicionarUsuario(new Usuario("125", "Ana", "Ana1234", "Salvador", "Cristo", TipoUsuario.Colaborador));
             fachada.adicionarFornecedor(fornecedor);
-            boolean sucesso = false;
         } catch (IDExistenteException e) {
             System.out.println(e.getMessage());
         }
@@ -49,7 +48,7 @@ public class Main {
                             System.out.println("Digite seu ID: ");
                             String ID = sc.nextLine();
                             try {
-                                Usuario tentativa = fachada.buscarUsuario(ID);
+                                fachada.buscarUsuario(ID);
                                 System.out.println("Digite sua dica senha:");
                                 String dicasenha = sc.nextLine();
                                 if (fachada.recuperarSenha(dicasenha, ID) != null) {
@@ -73,7 +72,6 @@ public class Main {
                                 resposta = sc.nextLine();
                                 if (resposta.equalsIgnoreCase("N")) {
                                     sucesso = true;
-                                    tentativarecuperarsenha = true;
                                     break;
                                 }
                             }
@@ -83,7 +81,7 @@ public class Main {
             }
         }
             if(usuario != null) {
-                System.out.println("1");
+                //Colocar o seu código aqui
             }
             sc.close();
     }

@@ -1,5 +1,4 @@
 package modelo;
-import repository.RepositorioControleDeAcesso;
 import repository.RepositorioUsuario;
 import exceptions.*;
 
