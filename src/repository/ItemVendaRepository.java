@@ -4,41 +4,58 @@ import exceptions.IDExistenteException;
 import exceptions.ItemNaoEncontradoException;
 import exceptions.RepositorioCheioException;
 import modelo.ItemVenda;
-
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 public class ItemVendaRepository {
-    private List<ItemVenda> catalogoItens = new ArrayList<>();
-    private static int CAPACIDADE_MAXIMA = 100; // Exemplo de capacidade
+    private static final int CAPACIDADE_MAXIMA = 100;
+    private ItemVenda[] catalogoItens = new ItemVenda[CAPACIDADE_MAXIMA];
+    private int proximaPosicao = 0;
 
-    public void adicionarItem(ItemVenda item) throws RepositorioCheioException, IDExistenteException {
-        if (catalogoItens.size() >= CAPACIDADE_MAXIMA) {
+    public void adicionarItem(ItemVenda novoItem) throws RepositorioCheioException, IDExistenteException {
+        if (proximaPosicao >= CAPACIDADE_MAXIMA) {
             throw new RepositorioCheioException("O catálogo de itens vendáveis está cheio.");
         }
-        for (ItemVenda i : catalogoItens) {
-            if (i.getPrato().getId() == item.getPrato().getId()) {
-                throw new IDExistenteException(item.getPrato().getId());
+        for (int i = 0; i < proximaPosicao; i++) {
+            ItemVenda itemExistente = catalogoItens[i];
+            if (itemExistente.getPrato().getId() == novoItem.getPrato().getId()) {
+                throw new IDExistenteException(String.valueOf(novoItem.getPrato().getId()), "ItemVenda");
             }
         }
-        catalogoItens.add(item);
+        catalogoItens[proximaPosicao] = novoItem;
+        proximaPosicao++;
     }
 
     public ItemVenda buscarPorIdFichaTecnica(int idFichaTecnica) throws ItemNaoEncontradoException {
-        for (ItemVenda item : catalogoItens) {
-            if (item.getPrato().getId() == idFichaTecnica) {
-                return item;
+        for (int i = 0; i < proximaPosicao; i++) {
+            if (catalogoItens[i].getPrato().getId() == idFichaTecnica) {
+                return catalogoItens[i];
             }
         }
         throw new ItemNaoEncontradoException("Item com ID de Ficha Técnica " + idFichaTecnica + " não encontrado no catálogo.");
     }
 
     public void removerItem(int idFichaTecnica) throws ItemNaoEncontradoException {
-        ItemVenda itemParaRemover = buscarPorIdFichaTecnica(idFichaTecnica);
-        catalogoItens.remove(itemParaRemover);
+        int indiceParaRemover = -1;
+        for (int i = 0; i < proximaPosicao; i++) {
+            if (catalogoItens[i].getPrato().getId() == idFichaTecnica) {
+                indiceParaRemover = i;
+                break;
+            }
+        }
+
+        if (indiceParaRemover == -1) {
+            throw new ItemNaoEncontradoException("Item com ID de Ficha Técnica " + idFichaTecnica + " não encontrado no catálogo.");
+        }
+
+        // Desloca os elementos para a esquerda para preencher o espaço
+        for (int i = indiceParaRemover; i < proximaPosicao - 1; i++) {
+            catalogoItens[i] = catalogoItens[i + 1];
+        }
+        catalogoItens[proximaPosicao - 1] = null; // Limpa a última posição
+        proximaPosicao--;
     }
 
-    public List<ItemVenda> buscarTodos() {
-        return new ArrayList<>(catalogoItens);
+    public ItemVenda[] buscarTodos() {
+        return Arrays.copyOf(catalogoItens, proximaPosicao);
     }
 }
