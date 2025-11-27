@@ -1,0 +1,84 @@
+package modelo;
+
+import enums.TipoUsuario;
+
+public class Usuario {
+    private String id;
+    private String nome;
+    private String login;
+    private String senha;
+    private String dicaSenha;
+    private TipoUsuario tipo;
+
+
+    public Usuario(String id, String nome, String login, String senha, String dicaSenha, TipoUsuario tipo) {
+        this.id = id;
+        this.nome = nome;
+        this.login = login;
+        this.senha = senha;
+        this.dicaSenha = dicaSenha;
+        this.tipo = tipo;
+    }
+
+    //Getters
+    public String getId() {
+        return id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public String getDicaSenha() {
+        return dicaSenha;
+    }
+
+    public TipoUsuario getTipo() {
+        return tipo;
+    }
+
+    //Setters
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public void setDicaSenha(String dicaSenha) {
+        this.dicaSenha = dicaSenha;
+    }
+    public void setTipo(TipoUsuario tipo) {this.tipo = tipo; }
+
+    //Autenticar senha
+    public boolean autenticar(String login, String senha) {
+        return this.login.equals(login) && this.senha.equals(senha);
+    }
+
+    //Recuperar senha
+    public String recuperarSenha(String dicaInformada) {
+        if (this.dicaSenha.equalsIgnoreCase(dicaInformada)) {
+            return senha;
+        } else {
+            return "Dica incorreta!";
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "ID:" + id + "Nome:" + nome + "\n";
+    }
+}
