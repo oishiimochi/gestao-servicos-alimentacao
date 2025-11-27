@@ -60,7 +60,7 @@ public class Venda {
         double receitaTotal = calcularReceitaTotal();
         double custoTotal = 0;
         for (int i = 0; i < numeroDeItens; i++) {
-            custoTotal += itens[i].getPrato().calcularCustoPorPorcao() * itens[i].getQuantidade();
+            custoTotal += itens[i].getFichaTecnica().calcularCustoPorPorcao() * itens[i].getQuantidade();
         }
         return receitaTotal - custoTotal;
     }

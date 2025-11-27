@@ -15,7 +15,7 @@ public class Fornecedor {
         this.email = email;
     }
 
-    //Getters
+    // Getters
     public String getId() {
         return id;
     }
@@ -49,6 +49,7 @@ public class Fornecedor {
         this.email = email;
     }
 
+    @Override
     public String toString() {
         return nome + " (CNPJ: " + cnpj + ")";
     }

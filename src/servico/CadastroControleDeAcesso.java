@@ -1,9 +1,10 @@
-package modelo;
+package servico;
 
 import enums.TipoUsuario;
 import exceptions.AcessoNegadoException;
 import exceptions.MetodoNaoEncontradoException;
 import exceptions.RepositorioCheioException;
+import modelo.Usuario;
 import repository.RepositorioControleDeAcesso;
 
 public class CadastroControleDeAcesso {

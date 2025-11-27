@@ -10,16 +10,13 @@ import java.util.List;
 public class Fachada {
     private CadastroUsuarios cadastroUsuarios;
     private CadastroFornecedor cadastroFornecedor;
-    private Estoque estoque;
-    private EngenhariaCardapio engenhariaCardapio;
+
 
     private static Fachada instace;
 
     public Fachada(){
         cadastroUsuarios = new CadastroUsuarios();
         cadastroFornecedor = new CadastroFornecedor();
-        estoque = new Estoque();
-        engenhariaCardapio = new EngenhariaCardapio();
     }
 
     public static Fachada getInstace(){
@@ -56,25 +53,5 @@ public class Fachada {
     }
     public Fornecedor buscarFornecedor(String ID) throws IdNaoEncontradoException {
         return cadastroFornecedor.buscarFornecedor(ID);
-    }
-    //-------------------------Estoque-------------------------//
-    public void adicionarProduto(Produto produto){
-        estoque.adicionarProduto(produto);
-    }
-    public boolean editarProduto(String id, Produto novoProduto){
-       return estoque.editarProduto(id, novoProduto);
-    }
-    public void removerProduto(String id){
-        estoque.removerProduto(id);
-    }
-    public void listarProdutos(){
-        estoque.listarProdutos();
-    }
-    public Produto buscarProduto(String id){
-        return estoque.buscarProduto(id);
-    }
-    //-------------------------EngenhariaCardapio---------------//
-    public List<ItemRelatorioEngenharia> gerarRelatorio(List<FichaTecnica> fichas, List<Venda> vendas){
-        return engenhariaCardapio.gerarRelatorio(fichas, vendas);
     }
 }

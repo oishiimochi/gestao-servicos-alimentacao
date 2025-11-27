@@ -1,10 +1,9 @@
-package modelo;
+package servico;
 
 import exceptions.IDExistenteException;
 import exceptions.IdNaoEncontradoException;
+import modelo.Fornecedor;
 import repository.RepositorioFornecedor;
-
-import java.util.ArrayList;
 
 public class CadastroFornecedor {
     private RepositorioFornecedor repositorio;

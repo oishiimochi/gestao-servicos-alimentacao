@@ -4,62 +4,54 @@ import exceptions.ValorInvalidoException;
 import exceptions.ValorNuloException;
 
 public class ItemVenda {
-    private FichaTecnica prato;
+    private FichaTecnica fichaTecnica;
     private double precoVenda;
     private int quantidade;
 
-    public ItemVenda(FichaTecnica prato) throws ValorNuloException, ValorInvalidoException {
-        this(prato, 1); // Assume quantidade 1 por padrão para o catálogo
-    }
+    private static final double FATOR_MAJORACAO_BEBIDA = 1.45; // 45%
+    private static final double FATOR_MAJORACAO_ALIMENTO = 1.35; // 35%
 
-    public ItemVenda(FichaTecnica prato, int quantidade) throws ValorNuloException, ValorInvalidoException {
-        if (prato == null) {
+    public ItemVenda(FichaTecnica fichaTecnica, int quantidade) throws ValorNuloException, ValorInvalidoException {
+        if (fichaTecnica == null) {
             throw new ValorNuloException("A ficha técnica não pode ser nula para criar um item de venda.");
         }
         if (quantidade <= 0) {
             throw new ValorInvalidoException("A quantidade do item deve ser maior que zero.");
         }
-        this.prato = prato;
+        this.fichaTecnica = fichaTecnica;
         this.quantidade = quantidade;
         this.precoVenda = calcularPrecoVenda();
     }
 
     private double calcularPrecoVenda() {
-        double custo = prato.calcularCustoPorPorcao();
-        String categoria = prato.getCategoria();
+        double custo = fichaTecnica.calcularCustoPorPorcao();
+        String categoria = fichaTecnica.getCategoria();
 
         if (categoria != null && (categoria.equalsIgnoreCase("Bebida") || categoria.equalsIgnoreCase("Bebidas"))) {
-            return custo * 1.45; // Custo + 45%
+            return custo * FATOR_MAJORACAO_BEBIDA;
         } else {
-            return custo * 1.35; // Custo + 35% para Alimentos e outros
+            return custo * FATOR_MAJORACAO_ALIMENTO;
         }
+    }
+
+    /**
+     * Calcula o lucro total para este item de venda (lucro unitário * quantidade).
+     * @return O lucro total do item.
+     */
+    public double calcularLucroTotalItem() {
+        double custoTotal = fichaTecnica.calcularCustoPorPorcao() * quantidade;
+        return getSubtotal() - custoTotal;
     }
 
     // Getters
-    public FichaTecnica getPrato() {
-        return prato;
-    }
-
-    public double getPrecoVenda() {
-        return precoVenda;
-    }
-
-    public int getQuantidade() {
-        return quantidade;
-    }
-
-    public double getSubtotal() {
-        return precoVenda * quantidade;
-    }
+    public FichaTecnica getFichaTecnica() { return fichaTecnica; }
+    public double getPrecoVenda() { return precoVenda; }
+    public int getQuantidade() { return quantidade; }
+    public double getSubtotal() { return precoVenda * quantidade; }
 
     @Override
     public String toString() {
-        // Ajustado para não mostrar quantidade se for 1 (padrão do catálogo)
-        if (this.quantidade == 1) {
-            return String.format("Item: %s, Preço de Venda: R$%.2f",
-                    prato.getNome(), precoVenda);
-        }
         return String.format("Item: %s, Qtd: %d, Preço Unit: R$%.2f, Subtotal: R$%.2f",
-                prato.getNome(), quantidade, precoVenda, getSubtotal());
+                fichaTecnica.getNome(), quantidade, precoVenda, getSubtotal());
     }
 }

@@ -1,4 +1,5 @@
-package modelo;
+package servico;
+import modelo.Usuario;
 import repository.RepositorioUsuario;
 import exceptions.*;
 

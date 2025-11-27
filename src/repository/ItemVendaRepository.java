@@ -17,8 +17,8 @@ public class ItemVendaRepository {
         }
         for (int i = 0; i < proximaPosicao; i++) {
             ItemVenda itemExistente = catalogoItens[i];
-            if (itemExistente.getPrato().getId() == novoItem.getPrato().getId()) {
-                throw new IDExistenteException(String.valueOf(novoItem.getPrato().getId()), "ItemVenda");
+            if (itemExistente.getFichaTecnica().getId() == novoItem.getFichaTecnica().getId()) {
+                throw new IDExistenteException(String.valueOf(novoItem.getFichaTecnica().getId()), "ItemVenda");
             }
         }
         catalogoItens[proximaPosicao] = novoItem;
@@ -27,7 +27,7 @@ public class ItemVendaRepository {
 
     public ItemVenda buscarPorIdFichaTecnica(int idFichaTecnica) throws ItemNaoEncontradoException {
         for (int i = 0; i < proximaPosicao; i++) {
-            if (catalogoItens[i].getPrato().getId() == idFichaTecnica) {
+            if (catalogoItens[i].getFichaTecnica().getId() == idFichaTecnica) {
                 return catalogoItens[i];
             }
         }
@@ -37,7 +37,7 @@ public class ItemVendaRepository {
     public void removerItem(int idFichaTecnica) throws ItemNaoEncontradoException {
         int indiceParaRemover = -1;
         for (int i = 0; i < proximaPosicao; i++) {
-            if (catalogoItens[i].getPrato().getId() == idFichaTecnica) {
+            if (catalogoItens[i].getFichaTecnica().getId() == idFichaTecnica) {
                 indiceParaRemover = i;
                 break;
             }

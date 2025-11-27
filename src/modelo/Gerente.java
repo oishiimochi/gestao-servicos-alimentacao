@@ -1,8 +1,9 @@
 package modelo;
 
-public class Gerente extends Usuario {
-    public Gerente(int id, String nome, String login, String senha, String dicaSenha) {
-        super(id, nome, login, senha, dicaSenha);
-    }
+import enums.TipoUsuario;
 
+public class Gerente extends Usuario {
+    public Gerente(String id, String nome, String login, String senha, String dicaSenha) {
+        super(id, nome, login, senha, dicaSenha, TipoUsuario.Gerente);
+    }
 }

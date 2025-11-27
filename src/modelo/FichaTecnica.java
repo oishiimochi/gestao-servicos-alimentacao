@@ -1,6 +1,7 @@
 package modelo;
 
-import java.util.ArrayList;
+import exceptions.ValorNuloException;
+import java.util.Arrays;
 
 public class FichaTecnica {
     private int id;
@@ -8,16 +9,19 @@ public class FichaTecnica {
     private String categoria;
     private String modoPreparo;
     private int rendimento; // quantas porções
-    private ArrayList<Produto> ingredientes;
+    private RequisitoReceita[] requisitos;
+    private int numeroDeRequisitos;
+    private static final int CAPACIDADE_INICIAL = 10;
 
-    // Construtor
+    // Construtor (sem custos operacionais)
     public FichaTecnica(int id, String nome, String categoria, String modoPreparo, int rendimento) {
         this.id = id;
         this.nome = nome;
         this.categoria = categoria;
         this.modoPreparo = modoPreparo;
         this.rendimento = rendimento;
-        this.ingredientes = new ArrayList<>();
+        this.requisitos = new RequisitoReceita[CAPACIDADE_INICIAL];
+        this.numeroDeRequisitos = 0;
     }
 
     //Getters
@@ -26,7 +30,9 @@ public class FichaTecnica {
     public String getCategoria() { return categoria; }
     public String getModoPreparo() { return modoPreparo; }
     public int getRendimento() { return rendimento; }
-    public ArrayList<Produto> getIngredientes() { return ingredientes; }
+    public RequisitoReceita[] getRequisitos() {
+        return Arrays.copyOf(requisitos, numeroDeRequisitos);
+    }
 
     //Setters
     public void setNome(String nome) { this.nome = nome; }
@@ -34,21 +40,34 @@ public class FichaTecnica {
     public void setModoPreparo(String modoPreparo) { this.modoPreparo = modoPreparo; }
     public void setRendimento(int rendimento) { this.rendimento = rendimento; }
 
-    //Adicionar ingrediente
-    public void adicionarIngrediente(Produto produto) {
-        ingredientes.add(produto);
+    //Adicionar requisito
+    public void adicionarRequisito(RequisitoReceita requisito) throws ValorNuloException {
+        if (requisito == null) {
+            throw new ValorNuloException("O requisito a ser adicionado não pode ser nulo.");
+        }
+        if (numeroDeRequisitos == requisitos.length) {
+            requisitos = Arrays.copyOf(requisitos, requisitos.length * 2);
+        }
+        this.requisitos[numeroDeRequisitos] = requisito;
+        this.numeroDeRequisitos++;
     }
 
-    public double calcularCustoTotal() {
+    private double calcularCustoTotalIngredientes() {
         double total = 0;
-        for (Produto p : ingredientes) {
-            total += p.getCustoUnitario();
+        for (int i = 0; i < numeroDeRequisitos; i++) {
+            total += requisitos[i].calcularCustoRequisito();
         }
         return total;
     }
 
-    //Calcular custo por porção
+    /**
+     * Calcula o custo de uma porção, baseado apenas no custo dos ingredientes.
+     * @return O custo da porção.
+     */
     public double calcularCustoPorPorcao() {
-        return calcularCustoTotal() / rendimento;
+        if (rendimento <= 0) {
+            return 0; // Evita divisão por zero
+        }
+        return calcularCustoTotalIngredientes() / rendimento;
     }
 }
