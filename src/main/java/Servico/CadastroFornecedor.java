@@ -1,4 +1,4 @@
-package cadastro;
+package Servico;
 
 import exceptions.IDExistenteException;
 import exceptions.IdNaoEncontradoException;

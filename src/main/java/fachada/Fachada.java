@@ -2,10 +2,8 @@ package fachada;
 
 import exceptions.IDExistenteException;
 import exceptions.IdNaoEncontradoException;
-import cadastro.*;
+import Servico.*;
 import modelo.*;
-
-import java.util.List;
 
 public class Fachada {
     private CadastroUsuarios cadastroUsuarios;

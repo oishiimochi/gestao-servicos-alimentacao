@@ -1,4 +1,4 @@
-package cadastro;
+package Servico;
 
 import enums.TipoUsuario;
 import exceptions.AcessoNegadoException;
