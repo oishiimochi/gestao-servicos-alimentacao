@@ -1,4 +1,4 @@
-package Servico;
+package cadastro;
 
 import exceptions.IDExistenteException;
 import exceptions.RepositorioCheioException;

@@ -1,4 +1,4 @@
-package Servico;
+package cadastro;
 
 import exceptions.*;
 import modelo.FichaTecnica;

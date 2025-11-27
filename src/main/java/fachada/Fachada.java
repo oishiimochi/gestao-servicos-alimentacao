@@ -2,7 +2,7 @@ package fachada;
 
 import exceptions.IDExistenteException;
 import exceptions.IdNaoEncontradoException;
-import Servico.*;
+import cadastro.*;
 import modelo.*;
 
 public class Fachada {
