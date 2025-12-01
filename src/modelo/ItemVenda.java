@@ -43,6 +43,11 @@ public class ItemVenda {
         return getSubtotal() - custoTotal;
     }
 
+    public double calcularCustoTotalItem() {
+        return fichaTecnica.calcularCustoPorPorcao() * quantidade;
+    }
+
+
     // Getters
     public FichaTecnica getFichaTecnica() { return fichaTecnica; }
     public double getPrecoVenda() { return precoVenda; }
