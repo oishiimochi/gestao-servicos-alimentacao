@@ -4,8 +4,6 @@ import exceptions.*;
 import modelo.*;
 import servico.*;
 
-import java.util.List;
-
 public class Fachada {
     private final CadastroUsuarios cadastroUsuarios;
     private final CadastroFornecedor cadastroFornecedor;

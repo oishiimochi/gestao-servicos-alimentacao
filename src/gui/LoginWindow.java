@@ -32,10 +32,12 @@ public class LoginWindow extends JFrame {
         fieldsPanel.add(new JLabel("Senha:"));
         fieldsPanel.add(passwordField);
 
-        // Painel para o botão
+        // Painel para os botões
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JButton loginButton = new JButton("Entrar");
+        JButton registerButton = new JButton("Cadastrar");
         buttonPanel.add(loginButton);
+        buttonPanel.add(registerButton);
 
         mainPanel.add(fieldsPanel, BorderLayout.CENTER);
         mainPanel.add(buttonPanel, BorderLayout.SOUTH);
@@ -57,6 +59,12 @@ public class LoginWindow extends JFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "Login ou senha inválidos.", "Erro de Login", JOptionPane.ERROR_MESSAGE);
             }
+        });
+
+        // Ação do botão de cadastro - abre a janela de registro
+        registerButton.addActionListener(e -> {
+            RegistrarUserWindow registerWindow = new RegistrarUserWindow();
+            registerWindow.setVisible(true);
         });
     }
 
