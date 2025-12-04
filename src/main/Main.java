@@ -5,7 +5,6 @@ import gui.MainWindow;
 public class Main {
     public static void main(String[] args) {
         MainWindow.main(args);
-        // If you want to keep the console version, comment out the above line and uncomment the code below.
         /*
         Scanner sc = new Scanner(System.in);
         Fachada fachada = Fachada.getInstace();
