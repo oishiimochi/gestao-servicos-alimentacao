@@ -1,14 +1,12 @@
 package main;
 
-import java.util.Scanner;
-
-import enums.TipoUsuario;
-import exceptions.*;
-import fachada.Fachada;
-import modelo.*;
+import gui.MainWindow;
 
 public class Main {
     public static void main(String[] args) {
+        MainWindow.main(args);
+        // If you want to keep the console version, comment out the above line and uncomment the code below.
+        /*
         Scanner sc = new Scanner(System.in);
         Fachada fachada = Fachada.getInstace();
         Fornecedor fornecedor = new Fornecedor("123", "Paulo", "123456789", "(81)985067123", "paulomorais@gmail.com");
@@ -80,9 +78,6 @@ public class Main {
                 }
             }
         }
-            if(usuario != null) {
-                //Colocar o seu código aqui
-            }
-            sc.close();
+        */
     }
 }

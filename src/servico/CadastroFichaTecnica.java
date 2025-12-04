@@ -41,6 +41,12 @@ public class CadastroFichaTecnica {
         return fichasExibicao;
     }
     
+    public void adicionarRequisito(int idFicha, modelo.RequisitoReceita requisito) throws exceptions.ValorInvalidoException, exceptions.ValorNuloException {
+        FichaTecnica ficha = buscarFichaTecnicaPorId(idFicha);
+        if (ficha == null) throw new exceptions.ValorNuloException("Ficha técnica não encontrada.");
+        ficha.adicionarRequisito(requisito);
+    }
+
     public FichaTecnicaRepository getRepositorio() {
         return repositorio;
     }

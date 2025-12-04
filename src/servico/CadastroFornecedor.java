@@ -34,4 +34,7 @@ public class CadastroFornecedor {
         }
         return fornecedor;
     }
+    public Fornecedor[] getTodosOsFornecedores() {
+        return repositorio.getRepositorio();
+    }
 }
