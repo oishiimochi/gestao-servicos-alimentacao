@@ -84,6 +84,64 @@ public class Programa {
                 System.out.println(String.format("Resumo da Venda -> Receita Total: R$%.2f | Lucro Bruto Total: R$%.2f", venda.calcularReceitaTotal(), venda.calcularLucroBruto()));
             }
 
+            // TESTE RELATÓRIO ENGENHARIA
+            System.out.println("\n=== Relatório de Engenharia de Cardápio ===");
+
+            // Passo A: Buscar os indicadores numéricos brutos
+            double[] indicadores = servicoVenda.calcularIndicadoresGerais();
+            int totalVendasGeral = (int) indicadores[0];
+            double lucroMedioPonderado = indicadores[1];
+            double mixIdeal = indicadores[2];
+
+            // Variável para acumular o texto que será salvo no final
+            String relatorioParaSalvar = "";
+            relatorioParaSalvar += "\n=== Relatório de Engenharia de Cardápio (Matriz BCG) ===\n";
+
+            // Passo B: Montar e Imprimir o Cabeçalho
+            String linhaSeparadora = "---------------------------------------------------------------------------------------";
+
+            System.out.println(linhaSeparadora);
+            relatorioParaSalvar += linhaSeparadora + "\n";
+
+            String textoIndicadores = "INDICADORES GERAIS:\n" +
+                    String.format("- Total de Itens Vendidos: %d\n", totalVendasGeral) +
+                    String.format("- Lucro Médio Ponderado (Linha de Corte): R$ %.2f\n", lucroMedioPonderado) +
+                    String.format("- Mix Ideal de Vendas (Linha de Corte): %.2f%%", mixIdeal * 100);
+
+            // Imprime indicadores
+            System.out.print(textoIndicadores + "\n");
+            relatorioParaSalvar += textoIndicadores + "\n";
+
+            System.out.println(linhaSeparadora);
+            relatorioParaSalvar += linhaSeparadora + "\n";
+
+            String cabecalhoTabela = String.format("%-20s | %-5s | %-10s | %-12s | %-10s",
+                    "Prato", "Qtd", "CMV Total", "Lucro Unit.", "Classificação");
+
+            System.out.println(cabecalhoTabela);
+            relatorioParaSalvar += cabecalhoTabela + "\n";
+
+            System.out.println(linhaSeparadora);
+            relatorioParaSalvar += linhaSeparadora + "\n";
+
+            // Passo C: Buscar e Imprimir as Linhas dos Pratos
+            String[] linhasPratos = servicoVenda.gerarLinhasMatrizBCG(totalVendasGeral, lucroMedioPonderado, mixIdeal);
+
+            for (String linha : linhasPratos) {
+                // Imprime na tela
+                System.out.println(linha);
+                // Concatena na variável de salvamento
+                relatorioParaSalvar += linha + "\n";
+            }
+
+            // Rodapé
+            System.out.println(linhaSeparadora);
+            relatorioParaSalvar += linhaSeparadora + "\n";
+
+            // Passo D: Salvar o acumulado no histórico
+            servicoVenda.salvarRelatorio(relatorioParaSalvar);
+            System.out.println("(Relatório gerado e arquivado no histórico com sucesso.)");
+
         } catch (ValorNuloException | ValorInvalidoException | RepositorioCheioException | IDExistenteException e) {
             System.err.println("\n!!! OCORREU UM ERRO DURANTE A EXECUÇÃO !!!");
             System.err.println("Mensagem: " + e.getMessage());
